@@ -1,0 +1,13 @@
+Package: pano
+Title: Converts between codes for UK parliamentary constituencies
+Version: 0.0.0.9000
+Authors@R: person("Chris", "Hanretty", email = "c.hanretty@uea.ac.uk", role = c("aut", "cre"))
+Description: Converts between Press Association, ONS, and character
+    representations of constituencies. Covers constituencies created under the Fifth
+    Periodic Review of Westminster boundaries.
+Depends:
+    R (>= 3.2.3)
+License: Apache License
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1.9000

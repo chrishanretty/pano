@@ -1,0 +1,5 @@
+constid <- function(sourcevar, origin, destination, warn = TRUE){
+    codes <- c("hansard_id","parlparse_id","name","ons_id","pa_id")
+    
+
+}
