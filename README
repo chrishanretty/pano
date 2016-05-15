@@ -1,0 +1,10 @@
+pano
+===
+
+`pano' is an R package to convert between identifiers for UK parliamentary constituencies.
+
+You can install it using devtools:
+
+    require(devtools)
+    install_github("chrishanretty/pano")
+
