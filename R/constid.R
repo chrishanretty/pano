@@ -6,11 +6,10 @@
 #' @param origin Coding scheme to convert from
 #' @param destination Coding scheme to convert to
 #' @param warn Flags IDs which return zero or multiple matches
-#' @keywords pano, Press Association, Hansard, ParlParse
 #' @note Supports the following coding schemes: Press Association
 #'     reference number ('pa_id'), Hansard ID ('hansard_id'),
-#'     ParlParseID ('parlpase_id'), Office of National Statistics ID
-#'     ('ons_id').
+#'     ParlParseID ('parlparse_id'), Office of National Statistics ID
+#'     ('ons_id'). Will try and handle constituency names ('name').
 #' @seealso
 #'     \url{election.pressassociation.com/Constituencies/general.php},
 #'     \url{https://en.wikipedia.org/wiki/ONS_coding_system},
@@ -28,11 +27,35 @@ constid <- function(sourcevar, origin, destination, warn = TRUE){
     if (!destination %in% codes) {
         stop("Invalid destination origin code supplied")
     }
-    dict <- na.omit(pano::pano_data[,c(origin, destination)])
+    if (origin == "name") { 
+        dict <- na.omit(pano::pano_data[,c('regex', destination)])
+    } else {
+        dict <- na.omit(pano::pano_data[,c(origin, destination)])
+    }
     destination_vector <- rep(NA, length(sourcevar))
-    matches <- match(sourcevar, dict[, origin])
-    destination_vector <- dict[matches, destination]
 
+    if (origin == "name") {
+        # Normalize sourcevar
+        sourcevar <- gsub("&","and",
+                          tolower(sourcevar),
+                          fixed = TRUE)
+        # For each regex in the database -> find matches
+        destination_list <- lapply(sourcevar, function(k) k)
+        for (i in 1:nrow(dict)){
+            matches <- grep(dict$regex[i],
+                            sourcevar,
+                            perl=TRUE,
+                            value=FALSE)
+            destination_vector[matches] <- dict[i, destination]
+            # Warning-related
+            destination_list[matches] <- lapply(destination_list[matches],
+                                                function(k) c(k, dict[i, destination]))
+        }
+        destination_list <- destination_list[lapply(destination_list, length) > 2]
+    } else {
+        matches <- match(sourcevar, dict[, origin])
+        destination_vector <- dict[matches, destination]
+    }
     # Warnings
     if(warn){
         nomatch <- sort(unique(sourcevar[is.na(destination_vector)]))
