@@ -39,6 +39,10 @@ constid <- function(sourcevar, origin, destination, warn = TRUE){
         sourcevar <- gsub("&","and",
                           tolower(sourcevar),
                           fixed = TRUE)
+       	sourcevar <- gsub(",","",sourcevar)
+	sourcevar <- gsub(".","",sourcevar, fisourcevared = TRUE)
+	sourcevar <- paste0("^",sourcevar,"$")
+
         # For each regex in the database -> find matches
         destination_list <- lapply(sourcevar, function(k) k)
         for (i in 1:nrow(dict)){
