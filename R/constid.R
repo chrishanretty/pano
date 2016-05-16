@@ -40,7 +40,7 @@ constid <- function(sourcevar, origin, destination, warn = TRUE){
                           tolower(sourcevar),
                           fixed = TRUE)
        	sourcevar <- gsub(",","",sourcevar)
-	sourcevar <- gsub(".","",sourcevar, fisourcevared = TRUE)
+	sourcevar <- gsub(".","",sourcevar, fixed = TRUE)
 	sourcevar <- paste0("^",sourcevar,"$")
 
         # For each regex in the database -> find matches
