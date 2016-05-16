@@ -3,7 +3,10 @@ pano
 
 `pano' is an R package to convert between identifiers for UK parliamentary constituencies.
 
-You can install it using devtools:
+It now tries to handle constituency names. If you find a constituency
+name which is not processed correctly, please let me know.
+
+You can install pano using devtools:
 
     require(devtools)
     install_github("chrishanretty/pano")
