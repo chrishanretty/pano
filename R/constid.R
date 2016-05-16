@@ -42,7 +42,6 @@ constid <- function(sourcevar, origin, destination, warn = TRUE){
        	sourcevar <- gsub(",","",sourcevar)
 	sourcevar <- gsub(".","",sourcevar, fixed = TRUE)
         sourcevar <- gsub(" burgh const| co const| boro const","",sourcevar)
-	sourcevar <- paste0("^",sourcevar,"$")
 
         # For each regex in the database -> find matches
         destination_list <- lapply(sourcevar, function(k) k)
