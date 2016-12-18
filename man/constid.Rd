@@ -22,8 +22,8 @@ identifiers.
 \note{
 Supports the following coding schemes: Press Association
     reference number ('pa_id'), Hansard ID ('hansard_id'),
-    ParlParseID ('parlpase_id'), Office of National Statistics ID
-    ('ons_id').
+    ParlParseID ('parlparse_id'), Office of National Statistics ID
+    ('ons_id'). Will try and handle constituency names ('name').
 }
 \examples{
 codes.of.origin <- pano::pano_data$pa_id # Vector of values to be converted
@@ -34,9 +34,4 @@ constid(codes.of.origin, "pa_id", "ons_id")
     \url{https://en.wikipedia.org/wiki/ONS_coding_system},
     \url{https://github.com/mysociety/parlparse}
 }
-\keyword{Association,}
-\keyword{Hansard,}
-\keyword{ParlParse}
-\keyword{Press}
-\keyword{pano,}
 
